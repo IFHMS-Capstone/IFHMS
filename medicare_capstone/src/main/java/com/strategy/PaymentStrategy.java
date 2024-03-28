@@ -1,5 +1,5 @@
 package com.strategy;
 
-public class PaymentStrategy {
-    
+public interface PaymentStrategy {
+    void processPayment(double amount);
 }
