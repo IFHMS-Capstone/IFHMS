@@ -1,5 +1,5 @@
 package com.adapter;
 
-public class EHRSystem {
-    
+public interface EHRSystem {
+    void retrievePatientData();
 }
