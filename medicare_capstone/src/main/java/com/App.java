@@ -1,13 +1,12 @@
 package com;
 
-import java.util.List;
+2
+
 import java.util.Scanner;
 
 import com.BillingCollection.Interact_Billing.Billing;
 import com.Decorator.AppointmentEntry;
-import com.Decorator.AppointmentsInterface;
-import com.Decorator.BasicAppointment;
-import com.Decorator.SpecialConsulation;
+
 import com.Models.Invoice;
 import com.Models.Patient;
 import com.facilities.Facility;
@@ -42,20 +41,25 @@ public class App {
                 Patient patient = new Patient(null, null, null, 23);
                 HERE: patient.displayPatientRoles();
                 Integer patientTask = scanner.nextInt();
+                while (true) {
 
-                if (patientTask == 1) {
-                    // make appointment
-                    AppointmentEntry appointmentEntry = new AppointmentEntry();
-                    appointmentEntry.displayAppointment();
-                    
+                    if (patientTask == 1) {
+                        // make appointment
+                        AppointmentEntry appointmentEntry = new AppointmentEntry();
+                        appointmentEntry.displayAppointment();
 
+                        System.out.println("Do you want to go back to the main menu? (yes/no)");
+                        String response = scanner.next();
+                        if (response.equalsIgnoreCase("yes")) {
+                            break; // Breaks the loop and goes back to the main menu
+                        }
 
+                    } else if (patientTask == 2) {
+                        Invoice invoice = new Invoice();
+                        Billing billing = new Billing(patient, invoice);
+                        billing.processBills();
 
-                } else if (patientTask == 2) {
-                    Invoice invoice = new Invoice();
-                    Billing billing = new Billing(patient, invoice);
-                    billing.processBills();
-
+                    }
                 }
 
             } else if (roleType == 2) {
