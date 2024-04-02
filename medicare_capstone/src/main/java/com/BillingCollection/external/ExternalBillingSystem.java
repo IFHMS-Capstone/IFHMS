@@ -7,9 +7,9 @@ public class ExternalBillingSystem {
     }
 
     // public void createInvoice(String customerID, double amount)
-    public void createInvoice(String customerName, double amount) {
+    public void createInvoice(String reason, double amount) {
         // Dummy implementation for creating an invoice in the external system
-        System.out.println("Creating invoice in external system for customer " + customerName + " with amount " + amount);
+        System.out.println("Created invoice in external system for  " + reason + " with amount " + amount);
         // You can add more logic here to simulate interaction with an external billing
         // system
     }

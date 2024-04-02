@@ -1,6 +1,6 @@
 package com.healthworkers;
 
-public class Doctor implements HealthWorker{
+public class Doctor extends HealthWorker{
     private String name;
     private String address;
     private String phoneNumber;
@@ -23,5 +23,22 @@ public class Doctor implements HealthWorker{
 
     void prescribeMedication() {
         System.out.println("Medication prescribed successfully");
+    }
+
+    @Override
+    void PrimaryRole() {
+        System.out.println("All available assignments seen");
+    }
+
+    @Override
+    void SecondaryRole() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'SecondaryRole'");
+    }
+
+    @Override
+    void tertiaryDetails() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tertiaryDetails'");
     }
 }

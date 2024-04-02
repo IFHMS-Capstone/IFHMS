@@ -4,11 +4,11 @@ public class FacilityFactory {
     public static Facility createFacility(int facilityType, String name, String address) {
         switch (facilityType) {
             case 1:
-                return new Pharmacy();
-            case 2:
                 return new Hospital(name, address);
-            case 3:
+            case 2:
                 return new Clinic();
+            case 3:
+                return new Pharmacy();
             default:
                 return null;
         }

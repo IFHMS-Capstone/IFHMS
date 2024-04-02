@@ -5,7 +5,10 @@ import com.healthworkers.HealthWorker;
 public class Pharmacy implements Facility {
     @Override
     public void printDetails() {
-        System.out.println("Pharmacy details...");
+       
+        System.out.println("........Welcome to Pharmacy....");
+        System.out.println("1.Patient");
+        System.out.println("2.Healthworker");
         // Print or return pharmacy-specific details
     }
    

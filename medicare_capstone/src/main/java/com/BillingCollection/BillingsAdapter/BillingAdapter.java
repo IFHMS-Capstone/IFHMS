@@ -14,6 +14,6 @@ public class BillingAdapter implements BillingSystemAdapter {
     @Override
     public void processInvoice(Invoice invoice) {
         // Convert your Invoice object to the format expected by the external system
-        externalBillingSystem.createInvoice(invoice.getPatientName(), invoice.getAmount());
+        externalBillingSystem.createInvoice(invoice.getReason(), invoice.getAmount());
     }
 }

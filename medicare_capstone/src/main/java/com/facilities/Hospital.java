@@ -18,7 +18,9 @@ public class Hospital implements Facility {
 
     @Override
     public void printDetails() {
-        System.out.println("Hospital details...");
+        System.out.println("........Welcome to hospital....");
+        System.out.println("1.Patient");
+        System.out.println("2.Healthworker");
         // Print or return hospital-specific details
     }
 

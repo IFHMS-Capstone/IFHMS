@@ -1,28 +1,75 @@
 package com;
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.BillingCollection.Interact_Billing.Billing;
+import com.Decorator.AppointmentEntry;
+import com.Decorator.AppointmentsInterface;
+import com.Decorator.BasicAppointment;
+import com.Decorator.SpecialConsulation;
+import com.Models.Invoice;
 import com.Models.Patient;
 import com.facilities.Facility;
 import com.facilities.FacilityFactory;
-import com.healthworkers.Doctor;
-import com.healthworkers.Nurse;
 
+import com.healthworkers.HealthWorker;
+import com.healthworkers.HealthWorkerFactory;
 
 public class App {
+    @SuppressWarnings({ "resource", "unused" })
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter facility type: ");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(".........WELCOME TO IHFMS........... ");
+        System.out.println("SELECT FACILITY OF INTEREST ");
+        System.out.println("1.Hospital ");
+        System.out.println("2.Clinic");
+        System.out.println("3.Pharmacy");
+
+        // selecting a preferred type of facility
+        System.out.println("Enter facility type:.. ");
         Integer facilityType = scanner.nextInt();
 
         Facility facility = FacilityFactory.createFacility(facilityType, "Mulago", "Kampala");
         if (facility != null) {
             facility.printDetails();
-            Nurse jen = new Nurse("Jeniffer", "Muk", "77777", "456789456");
-            facility.addHealthWorker(jen);
-            facility.addHealthWorker(new Doctor("Jjumba", "Kikoni", "045245245", "jjumba@jjumba"));
-            jen.registerPatient(new Patient("John", "Doe", "123456789", 25));
+            // select role in this facility either as patient or healthy worker
+            System.out.println("Select role: ");
+            Integer roleType = scanner.nextInt();
+
+            if (roleType == 1) {
+                Patient patient = new Patient(null, null, null, 23);
+                HERE: patient.displayPatientRoles();
+                Integer patientTask = scanner.nextInt();
+
+                if (patientTask == 1) {
+                    // make appointment
+                    AppointmentEntry appointmentEntry = new AppointmentEntry();
+                    appointmentEntry.displayAppointment();
+                    
+
+
+
+                } else if (patientTask == 2) {
+                    Invoice invoice = new Invoice();
+                    Billing billing = new Billing(patient, invoice);
+                    billing.processBills();
+
+                }
+
+            } else if (roleType == 2) {
+                // if healthyworker select typr of healthyworker
+                System.out.println("..............WHAT KIND OF HEALTH WORKER ARE YOU ");
+                System.out.println("1.Doctor ");
+                System.out.println("2.Nurse");
+                Integer healthWorkerType = scanner.nextInt();
+
+                HealthWorker healthyWorker = HealthWorkerFactory.getHealthyWorker(healthWorkerType);
+                healthyWorker.templateMethod();
+
+            }
+
         } else {
             System.out.println("Invalid facility type");
         }

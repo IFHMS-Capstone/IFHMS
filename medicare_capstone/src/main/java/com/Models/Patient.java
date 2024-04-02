@@ -12,4 +12,11 @@ public class Patient {
         this.phoneNumber = phoneNumber;
         this.age = age;
     }
+
+    public void displayPatientRoles(){
+        System.out.println(".....PATIENT INTEREST........ ");
+        System.out.println("1.Book appointment ");
+        System.out.println("2.Pay bills");
+
+    }
 }
