@@ -74,7 +74,8 @@ public class App {
         } else {
             System.out.println("Invalid facility type");
         }
+
+        new MessagingMain();
+        scanner.close();
     }
-
-
 }
