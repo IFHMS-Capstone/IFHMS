@@ -18,7 +18,6 @@ public class BasicAppointment implements AppointmentsInterface {
     }
 
 
-
     @Override
     public double getCost() {
         return cost;
