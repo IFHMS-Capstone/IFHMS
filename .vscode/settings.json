@@ -1,5 +1,6 @@
 {
     "java.project.sourcePaths": [
         "medicare_capstone\\src"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

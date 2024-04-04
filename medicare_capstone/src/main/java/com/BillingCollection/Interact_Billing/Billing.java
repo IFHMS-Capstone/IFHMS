@@ -18,7 +18,6 @@ public class Billing {
     public Billing(Patient patient, Invoice invoice){
         this.patient = patient;
         this.invoice=invoice;
-
     }
 
     
