@@ -1,7 +1,5 @@
 package com;
 
-2
-
 import java.util.Scanner;
 
 import com.BillingCollection.Interact_Billing.Billing;
