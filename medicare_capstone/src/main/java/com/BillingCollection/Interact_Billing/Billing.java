@@ -15,14 +15,13 @@ public class Billing {
     private Patient patient;
     private Invoice invoice;
 
-    public Billing(Patient patient, Invoice invoice){
+    public Billing(Patient patient, Invoice invoice) {
         this.patient = patient;
-        this.invoice=invoice;
+        this.invoice = invoice;
     }
 
-    
-    public void processBills(){
-        invoice.setPatient(patient.firstName +" "+ patient.lastName);
+    public void processBills() {
+        invoice.setPatient(patient.firstName + " " + patient.lastName);
         System.out.println("Enter Reason of payment:");
         String reason = s.nextLine();
 
@@ -37,5 +36,5 @@ public class Billing {
 
         billingFacade.processPatientInvoice(patient, invoice);
     }
-    
+
 }
