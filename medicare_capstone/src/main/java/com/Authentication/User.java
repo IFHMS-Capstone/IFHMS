@@ -1,17 +1,15 @@
 package com.Authentication;
 
-import java.util.List;
-import java.util.Iterator;
 
 public class User {
     private String username;
     private String password;
-    private List<Role> roles;
+    private String role;
 
-    public User(String username, String password, List<Role> roles) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -22,7 +20,7 @@ public class User {
         return password;
     }
 
-    public Iterator<Role> getRolesIterator() {
-        return roles.iterator();
+    public String getRole() {
+        return role;
     }
 }
