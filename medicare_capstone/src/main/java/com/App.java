@@ -18,7 +18,7 @@ public class App {
 
         // Create users with roles
         User patientUser = new User("patient1", "pass22#", Arrays.asList(patientRole));
-        User doctorUser = new User("doctor44", "iamdoc99", Arrays.asList(healthWorkerRole));
+        User doctorUser = new User("doctor44", "iamdoc99", Arrays.asList(healthWorkerRole, patientRole));
 
         List<User> users = Arrays.asList(patientUser, doctorUser);
 
