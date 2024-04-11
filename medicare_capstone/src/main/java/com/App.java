@@ -5,106 +5,58 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.Authentication.*;
-import com.BillingCollection.Interact_Billing.Billing;
-import com.Decorator.AppointmentEntry;
 
-import com.Models.Invoice;
-import com.Models.Patient;
-import com.facilities.Facility;
-import com.facilities.FacilityFactory;
-
-import com.healthworkers.HealthWorker;
-import com.healthworkers.HealthWorkerFactory;
+import com.chainofResponsibility.*;
 
 public class App {
     @SuppressWarnings({ "resource", "unused" })
     public static void main(String[] args) throws Exception {
 
-    // Create scanner object to read user input
-    Scanner scanner = new Scanner(System.in);
+        // Create roles
+        Role patientRole = new Role("patient");
+        Role healthWorkerRole = new Role("health worker");
 
-    System.out.println(".........WELCOME TO IHFMS........... ");
+        // Create users with roles
+        User patientUser = new User("patient1", "pass22#", Arrays.asList(patientRole));
+        User doctorUser = new User("doctor44", "iamdoc99", Arrays.asList(healthWorkerRole));
 
-    List<User> users = Arrays.asList(
-            new User("doctor44", "iamdoc99@", "health worker"),
-            new User("patient", "pass33$", "patient"));
+        List<User> users = Arrays.asList(patientUser, doctorUser);
 
-    // Prompt for username
-    System.out.println("Enter username: ");
-    String username = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(".........WELCOME TO IHFMS........... ");
 
-    // Prompt for password
-    System.out.println("Enter password: ");
-    String password = scanner.nextLine();
+        // Prompt for user login
+        System.out.println("Please log in to continue:");
 
-    // Prompt for role
-    System.out.println("Enter role(patient/health worker): ");
-    String role = scanner.nextLine();
+        // Prompt for username
+        System.out.println("Enter username: ");
+        String username = scanner.nextLine();
 
-    // Authenticate User
-    // Initialize the authentication strategy
-    AuthenticationStrategy authStrategy = new RoleBasedAuthenticationStrategy(users);
-    User authenticatedUser = authStrategy.authenticate(username, password, role);
+        // Prompt for password
+        System.out.println("Enter password: ");
+        String password = scanner.nextLine();
 
-    if (authenticatedUser != null) {
-        System.out.println("Authentication successful!! Welcome " + username);
+        // Prompt for role
+        System.out.println("Enter role(patient/health worker): ");
+        String role = scanner.nextLine();
 
-        System.out.println("SELECT FACILITY OF INTEREST ");
-            System.out.println("1.Hospital ");
-            System.out.println("2.Clinic");
-            System.out.println("3.Pharmacy");
+        // Authenticate user
+        AuthenticationStrategy authStrategy = new RoleBasedAuthenticationStrategy(users);
+        boolean isAuthenticated = authStrategy.authenticate(username, password, role);
 
-            // selecting a preferred type of facility
-            System.out.println("Enter facility type:.. ");
-            Integer facilityType = scanner.nextInt();
+        if (isAuthenticated) {
+            System.out.println("Authentication successful!! Welcome " + username);
+            
 
-            Facility facility = FacilityFactory.createFacility(facilityType, "Mulago", "Kampala");
-            if (facility != null) {
-                facility.printDetails();
-                // select role in this facility either as patient or healthy worker
-                System.out.println("Select role: ");
-                Integer roleType = scanner.nextInt();
+            IRole rolechain1 = new PatientRole();
+            IRole rolechain2 = new HealthworkerRole();
 
-                if (roleType == 1) {
-                    Patient patient = new Patient(null, null, null, 23);
-                    HERE: patient.displayPatientRoles();
-                    Integer patientTask = scanner.nextInt();
-                    while (true) {
+            rolechain1.setnextRole(rolechain2);
+            rolechain1.execute(role);
 
-                        if (patientTask == 1) {
-                            // make appointment
-                            AppointmentEntry appointmentEntry = new AppointmentEntry();
-                            appointmentEntry.displayAppointment();
 
-                            System.out.println("Do you want to go back to the main menu? (yes/no)");
-                            String response = scanner.next();
-                            if (response.equalsIgnoreCase("yes")) {
-                                break; // Breaks the loop and goes back to the main menu
-                            }
 
-                        } else if (patientTask == 2) {
-                            Invoice invoice = new Invoice();
-                            Billing billing = new Billing(patient, invoice);
-                            billing.processBills();
-
-                        }
-                    }
-
-                } else if (roleType == 2) {
-                    // if healthyworker select typr of healthyworker
-                    System.out.println("..............WHAT KIND OF HEALTH WORKER ARE YOU ");
-                    System.out.println("1.Doctor ");
-                    System.out.println("2.Nurse");
-                    Integer healthWorkerType = scanner.nextInt();
-
-                    HealthWorker healthyWorker = HealthWorkerFactory.getHealthyWorker(healthWorkerType);
-                    healthyWorker.templateMethod();
-
-                }
-
-            } else {
-                System.out.println("Invalid facility type");
-            }
+           
 
             new MessagingMain();
             scanner.close();
@@ -113,5 +65,5 @@ public class App {
             System.out.println("Authentication failed. Invalid credentials or role.");
         }
         scanner.close();
-    } 
+    }
 }
