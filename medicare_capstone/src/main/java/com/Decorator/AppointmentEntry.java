@@ -36,6 +36,8 @@ public class AppointmentEntry {
             AppointmentsInterface basicAppointment = new BasicAppointment("Patient Checkup", 10000);
             AppointmentsInterface appointmentWithSpecialist = new SpecialConsulation(basicAppointment);
             System.out.println("You have booked a Specialist appointment at Ugx.:"+ appointmentWithSpecialist.getCost());
+            
+            
     
         }
 

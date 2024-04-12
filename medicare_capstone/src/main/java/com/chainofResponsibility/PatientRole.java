@@ -1,4 +1,5 @@
 package com.chainofResponsibility;
+
 import java.util.Scanner;
 import com.BillingCollection.Interact_Billing.Billing;
 import com.Decorator.AppointmentEntry;
@@ -11,50 +12,46 @@ import com.facilities.FacilityFactory;
 import com.healthworkers.HealthWorker;
 import com.healthworkers.HealthWorkerFactory;
 
-
-
 public class PatientRole implements IRole {
     Scanner scanner = new Scanner(System.in);
     private IRole role;
 
     @Override
     public void setnextRole(IRole role) {
-        this.role =role;
-      
+        this.role = role;
+
     }
 
     @Override
     public void execute(String myrole) {
-       if(myrole.equals("patient")){
+        if (myrole.equals("patient")) {
 
-        System.out.println("SELECT FACILITY OF INTEREST ");
-        System.out.println("1.Hospital ");
-        System.out.println("2.Clinic");
-        System.out.println("3.Pharmacy");
+            System.out.println("SELECT FACILITY OF INTEREST ");
+            System.out.println("1.Hospital ");
+            System.out.println("2.Clinic");
+            System.out.println("3.Pharmacy");
 
-        // selecting a preferred type of facility
-        System.out.println("Enter facility type:.. ");
-        Integer facilityType = scanner.nextInt();
+            // selecting a preferred type of facility
+            System.out.println("Enter facility type:.. ");
+            Integer facilityType = scanner.nextInt();
 
-        Facility facility = FacilityFactory.createFacility(facilityType, "Mulago", "Kampala");
-        if (facility != null) {
-            
+            Facility facility = FacilityFactory.createFacility(facilityType, "Mulago", "Kampala");
+            if (facility != null) {
 
-            
                 Patient patient = new Patient(null, null, null, 23);
-                patient.displayPatientRoles();
-                Integer patientTask = scanner.nextInt();
                 while (true) {
+                    patient.displayPatientRoles();
+                    Integer patientTask = scanner.nextInt();
 
                     if (patientTask == 1) {
                         // make appointment
-                        AppointmentEntry appointmentEntry = new AppointmentEntry();
-                        appointmentEntry.displayAppointment();
+                        int i = 0;
+                        while (i < 2) {
+                            AppointmentEntry appointmentEntry = new AppointmentEntry();
+                            appointmentEntry.displayAppointment();
 
-                        System.out.println("Do you want to go back to the main menu? (yes/no)");
-                        String response = scanner.next();
-                        if (response.equalsIgnoreCase("yes")) {
-                            break; // Breaks the loop and goes back to the main menu
+                            i++;
+
                         }
 
                     } else if (patientTask == 2) {
@@ -62,18 +59,18 @@ public class PatientRole implements IRole {
                         Billing billing = new Billing(patient, invoice);
                         billing.processBills();
 
+                        break;
+
                     }
                 }
 
-            
+            } else {
+                System.out.println("Invalid facility type");
+            }
 
         } else {
-            System.out.println("Invalid facility type");
+            this.role.execute(myrole);
         }
-
-       }else{
-        this.role.execute(myrole);
-       }
     }
-    
+
 }
