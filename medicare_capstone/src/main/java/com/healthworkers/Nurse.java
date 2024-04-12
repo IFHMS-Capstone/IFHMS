@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.Models.Patient;
+import com.Repository.Providers.DataProvider;
+import com.Repository.Repository.DataRepository;
 
 
 public class Nurse extends HealthWorker{
@@ -11,7 +13,7 @@ public class Nurse extends HealthWorker{
     private String address;
     private String phoneNumber;
     private String email;
-    public static List<Patient> patients = new ArrayList<Patient>();
+    
     Scanner s = new Scanner(System.in);
     public Nurse(String name, String address, String phoneNumber, String email) {
         this.name = name;
@@ -29,7 +31,9 @@ public class Nurse extends HealthWorker{
     }
 
     public void registerPatient(Patient patient) {
-        patients.add(patient);
+        DataRepository repo = new DataRepository(new DataProvider());
+        repo.registerPatient(patient);
+        
         System.out.println("Patient registered successfully");
     }
 
@@ -48,6 +52,7 @@ public class Nurse extends HealthWorker{
         int age = s.nextInt();
 
         Patient patient = new  Patient(firstname, lastname,phone,age);
+        
 
         registerPatient(patient);
       
@@ -56,13 +61,21 @@ public class Nurse extends HealthWorker{
 
     @Override
     void SecondaryRole() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'SecondaryRole'");
+        System.out.println("...........REGISTERED PATIENTS.............");
+        DataRepository dataRepository = new DataRepository(new DataProvider());
+        List<Patient> patientList = dataRepository.getPatients();
+
+        for(Patient patient : patientList){
+            System.out.print(patient.firstName+ " "+patient.lastName + " ");
+            System.out.println(patient.phoneNumber);
+
+        }
+
+       
     }
 
     @Override
     void tertiaryDetails() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tertiaryDetails'");
+        
     }
 }

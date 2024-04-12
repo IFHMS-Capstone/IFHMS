@@ -53,7 +53,8 @@ public class App {
             rolechain1.setnextRole(rolechain2);
             rolechain1.execute(role);
            
-            new MessagingMain();
+
+            // new MessagingMain();
             scanner.close();
 
         } else {

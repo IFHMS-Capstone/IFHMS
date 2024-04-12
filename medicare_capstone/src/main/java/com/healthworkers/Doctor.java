@@ -1,6 +1,12 @@
 package com.healthworkers;
 
-public class Doctor extends HealthWorker{
+import java.util.List;
+
+import com.Repository.Providers.DataProvider;
+import com.Repository.Repository.DataRepository;
+import com.Models.Appointment;
+
+public class Doctor extends HealthWorker {
     private String name;
     private String address;
     private String phoneNumber;
@@ -27,18 +33,24 @@ public class Doctor extends HealthWorker{
 
     @Override
     void PrimaryRole() {
-        System.out.println("All available assignments seen");
+        System.out.println("...........YOUR APPOINTMENTS .............");
+        DataRepository dataRepository = new DataRepository(new DataProvider());
+        List<Appointment> appointmenttList = dataRepository.getAppointments();
+
+        for (Appointment appoint : appointmenttList) {
+            System.out.print(appoint.getPatientName() + " :");
+            System.out.println(appoint.getAppointmentType());
+
+        }
     }
 
     @Override
     void SecondaryRole() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'SecondaryRole'");
+
     }
 
     @Override
     void tertiaryDetails() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tertiaryDetails'");
+
     }
 }
