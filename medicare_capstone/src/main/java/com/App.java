@@ -47,17 +47,12 @@ public class App {
         if (isAuthenticated) {
             System.out.println("Authentication successful!! Welcome " + username);
             
-
             IRole rolechain1 = new PatientRole();
             IRole rolechain2 = new HealthworkerRole();
 
             rolechain1.setnextRole(rolechain2);
             rolechain1.execute(role);
-
-
-
            
-
             new MessagingMain();
             scanner.close();
 
