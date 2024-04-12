@@ -7,6 +7,9 @@ import java.util.Scanner;
 import com.Authentication.*;
 
 import com.chainofResponsibility.*;
+import com.observer.ConsoleMessageNotifier;
+import com.observer.MessageService;
+import com.observer.MessagingSystem;
 
 public class App {
     @SuppressWarnings({ "resource", "unused" })
@@ -52,10 +55,18 @@ public class App {
 
             rolechain1.setnextRole(rolechain2);
             rolechain1.execute(role);
+
+            
+            // Initialize the messaging service and system
+            MessageService messageService = new MessageService(users);
+            MessagingSystem messagingSystem = new MessagingSystem(messageService, new ConsoleMessageNotifier(), scanner, users);
+
+            // Start the messaging system
+            messagingSystem.start();
            
 
-            new MessagingMain();
-            scanner.close();
+            // new MessagingMain();
+            // scanner.close();
 
         } else {
             System.out.println("Authentication failed. Invalid credentials or role.");

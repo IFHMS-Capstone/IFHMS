@@ -1,13 +1,15 @@
 package com.observer;
 
+import com.Authentication.User;
+
 public class Message {
     private final long id;
-    private final String sender;
-    private final String recipient;
+    private final User sender;
+    private final User recipient;
     private final String content;
     private final long timestamp;
 
-    public Message(long id, String sender, String recipient, String content, long timestamp) {
+    public Message(long id, User sender, User recipient, String content, long timestamp) {
         this.id = id;
         this.sender = sender;
         this.recipient = recipient;
@@ -20,11 +22,11 @@ public class Message {
         return id;
     }
 
-    public String getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public String getRecipient() {
+    public User getRecipient() {
         return recipient;
     }
 

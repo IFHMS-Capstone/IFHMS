@@ -2,21 +2,24 @@ package com.observer;
 
 import java.util.List;
 import java.util.Scanner;
+import com.Authentication.User;
 
 public class MessagingSystem {
     private final MessageService messageService;
     private final MessageNotifier notifier;
     private final Scanner scanner;
+    private final List<User> users;
 
-    public MessagingSystem(MessageService messageService, MessageNotifier notifier, Scanner scanner) {
+    public MessagingSystem(MessageService messageService, MessageNotifier notifier, Scanner scanner, List<User> users) {
         this.messageService = messageService;
         this.notifier = notifier;
         this.scanner = scanner;
+        this.users = users;
     }
 
-    public void start() {
+    public void start() throws Exception {
         while (true) {
-            System.out.println("Messaging System");
+            System.out.println("\nMessaging System");
             System.out.println("1. Send a message");
             System.out.println("2. View messages");
             System.out.println("3. Exit");
@@ -32,6 +35,7 @@ public class MessagingSystem {
                     break;
                 case "3":
                     System.out.println("Exiting messaging system.");
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -39,45 +43,57 @@ public class MessagingSystem {
         }
     }
 
-    private void sendMessage() {
-        System.out.print("Enter sender's name: ");
-        String sender = scanner.nextLine();
+    private void sendMessage() throws Exception {
+        System.out.print("Enter sender's username: ");
+        String senderName = scanner.nextLine();
+        System.out.print("Enter recipient's username: ");
+        String recipientName = scanner.nextLine();
 
-        System.out.print("Enter recipient's name: ");
-        String recipient = scanner.nextLine();
+        User sender = findUserByName(senderName);
+        User recipient = findUserByName(recipientName);
+
+        if (sender == null) {
+            System.out.println("Sender '" + senderName + "' not found.");
+            return;
+        }
+        if (recipient == null) {
+            System.out.println("Recipient '" + recipientName + "' not found.");
+            return;
+        }
 
         System.out.print("Enter message: ");
         String content = scanner.nextLine();
 
         Message message = messageService.createMessage(sender, recipient, content);
         notifier.notify(message);
+        System.out.println("Message sent successfully.");
     }
 
-    private void viewMessages() {
-        System.out.print("Enter your name to view messages: ");
-        String recipient = scanner.nextLine();
+    private void viewMessages() throws Exception {
+        System.out.print("Enter your username to view messages: ");
+        String recipientName = scanner.nextLine();
+
+        User recipient = findUserByName(recipientName);
+        if (recipient == null) {
+            System.out.println("Recipient '" + recipientName + "' not found.");
+            return;
+        }
 
         List<Message> recipientMessages = messageService.getMessagesForRecipient(recipient);
-        System.out.println("Messages for " + recipient + ":");
-        for (Message msg : recipientMessages) {
-            System.out.println(msg.getSender() + ": " + msg.getContent() + " (at " + msg.getTimestamp() + ")");
-        }
-
-        System.out.print("Would you like to reply to a message? (yes/no): ");
-        String reply = scanner.nextLine();
-        if ("yes".equalsIgnoreCase(reply)) {
-            System.out.print("Enter the ID of the message you want to reply to: ");
-            long messageId = Long.parseLong(scanner.nextLine());
-            // Find the message by ID and set the recipient as the original sender
+        if (recipientMessages.isEmpty()) {
+            System.out.println("No messages found for " + recipient.getUsername());
+        } else {
+            System.out.println("Messages for " + recipient.getUsername() + ":");
             for (Message msg : recipientMessages) {
-                if (msg.getId() == messageId) {
-                    System.out.print("Enter your reply: ");
-                    String replyContent = scanner.nextLine();
-                    Message replyMessage = messageService.createMessage(recipient, msg.getSender(), replyContent);
-                    notifier.notify(replyMessage);
-                    break;
-                }
+                System.out.println(msg.getSender().getUsername() + ": " + msg.getContent() + " (at " + msg.getTimestamp() + ")");
             }
         }
+    }
+
+    private User findUserByName(String name) {
+        return users.stream()
+                    .filter(user -> user.getUsername().equals(name))
+                    .findFirst()
+                    .orElse(null);
     }
 }
