@@ -9,8 +9,6 @@ import com.Models.Patient;
 import com.facilities.Facility;
 import com.facilities.FacilityFactory;
 
-import com.healthworkers.HealthWorker;
-import com.healthworkers.HealthWorkerFactory;
 
 public class PatientRole implements IRole {
     Scanner scanner = new Scanner(System.in);
