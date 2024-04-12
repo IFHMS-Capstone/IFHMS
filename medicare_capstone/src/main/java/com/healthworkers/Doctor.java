@@ -32,13 +32,11 @@ public class Doctor extends HealthWorker{
 
     @Override
     void SecondaryRole() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'SecondaryRole'");
+        
     }
 
     @Override
     void tertiaryDetails() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tertiaryDetails'");
+        
     }
 }
