@@ -1,8 +1,8 @@
 
 package com.observer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.Authentication.User;
