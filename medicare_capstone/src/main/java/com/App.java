@@ -65,8 +65,6 @@ public class App {
             messagingSystem.start();
            
 
-            // new MessagingMain();
-            // scanner.close();
 
         } else {
             System.out.println("Authentication failed. Invalid credentials or role.");
