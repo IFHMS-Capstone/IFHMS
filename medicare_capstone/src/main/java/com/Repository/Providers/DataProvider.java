@@ -10,8 +10,8 @@ public class DataProvider implements IDataProvider {
 
     public DataProvider() {
         AppointmentList.add(new Appointment("Peter Kyeyune", "Basic"));
-        AppointmentList.add(new Appointment("John Doe", "Basic"));
-        AppointmentList.add(new Appointment("Jane Doe", "Special Consultation"));
+        AppointmentList.add(new Appointment("John Doe", "Special Consultation"));
+        AppointmentList.add(new Appointment("Jane Doe", "Basic"));
         AppointmentList.add(new Appointment("Alice Doe", "Special Consultation"));
     }
 
