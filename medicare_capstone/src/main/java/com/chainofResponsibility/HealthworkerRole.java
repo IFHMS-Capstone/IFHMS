@@ -22,7 +22,7 @@ public class HealthworkerRole implements IRole {
             // if healthyworker select typr of healthyworker
             int i = 0;
             while (i < 2) {
-                System.out.println("\n...........WHAT KIND OF HEALTH WORKER ARE YOU?....... ");
+                System.out.println("\n\n...........WHAT KIND OF HEALTH WORKER ARE YOU?....... ");
                 System.out.println("1.Doctor ");
                 System.out.println("2.Nurse");
                 System.out.print("Choose an option: ");

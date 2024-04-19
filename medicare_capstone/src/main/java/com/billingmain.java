@@ -12,7 +12,7 @@ public class billingmain {
     public static void main(String args[]) {
         Scanner s = new Scanner(System.in);
         // create a patient
-        System.out.println(".................ENTER PATIENT DETAILS...............");
+        System.out.println("\n\n.................ENTER PATIENT DETAILS...............");
         System.out.print("Enter Firstname:");
         String fname = s.nextLine();
         System.out.print("Enter Lastname:");

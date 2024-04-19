@@ -26,7 +26,7 @@ public class App {
         List<User> users = Arrays.asList(patientUser, doctorUser);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println(".........WELCOME TO IHFMS........... ");
+        System.out.println("\n\n\n.........WELCOME TO IHFMS........... ");
 
         // Prompt for user login
         System.out.println("Please log in to continue:");

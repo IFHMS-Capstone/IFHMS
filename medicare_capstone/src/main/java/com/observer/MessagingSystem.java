@@ -19,7 +19,7 @@ public class MessagingSystem {
 
     public void start() throws Exception {
         while (true) {
-            System.out.println("\nIHFMS MESSAGING SYSTEM");
+            System.out.println("\n\n.....IHFMS MESSAGING SYSTEM.....");
             System.out.println("1. Send a message");
             System.out.println("2. View messages");
             System.out.println("3. Exit");
