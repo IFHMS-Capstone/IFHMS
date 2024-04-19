@@ -8,6 +8,13 @@ public class DataProvider implements IDataProvider {
     private static List<Patient> patientsList = new ArrayList<Patient>();
     private static List<Appointment> AppointmentList = new ArrayList<Appointment>();
 
+    public DataProvider() {
+        AppointmentList.add(new Appointment("Peter Kyeyune", "Basic"));
+        AppointmentList.add(new Appointment("John Doe", "Basic"));
+        AppointmentList.add(new Appointment("Jane Doe", "Special Consultation"));
+        AppointmentList.add(new Appointment("Alice Doe", "Special Consultation"));
+    }
+
     @Override
     public List<Patient> getPatients() {
         return patientsList;

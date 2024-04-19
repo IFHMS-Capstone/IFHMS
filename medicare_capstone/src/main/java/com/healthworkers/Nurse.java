@@ -39,13 +39,13 @@ public class Nurse extends HealthWorker{
     @Override
     void PrimaryRole() {
        
-        System.out.println(".....Enter PatientDetails.......");
+        System.out.println(".....Enter Patient Details.......");
         
-        System.out.println("Enter First name:");
+        System.out.println("Enter first name:");
         String firstname = s.nextLine();
         System.out.println("Enter last name: " );
         String lastname = s.nextLine();
-        System.out.println("Enter PhoneNumber: ");
+        System.out.println("Enter Phone number: ");
         String phone = s.nextLine();
         System.out.println("Enter age: " );
         int age = s.nextInt();
